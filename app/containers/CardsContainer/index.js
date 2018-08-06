@@ -22,7 +22,7 @@ import Wrapper from '../../components/Card/Wrapper';
 /* eslint-disable react/prefer-stateless-function */
 export class CardsContainer extends React.Component {
   componentWillMount() {
-    this.props.foo();
+    this.props.getCards();
   }
 
   renderCard(item, index) {
@@ -46,7 +46,7 @@ export class CardsContainer extends React.Component {
 }
 
 CardsContainer.propTypes = {
-  foo: PropTypes.func,
+  getCards: PropTypes.func,
   cardscontainer: PropTypes.any,
 };
 
@@ -56,7 +56,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    foo: () => dispatch(defaultAction()),
+    getCards: () => dispatch(defaultAction()),
   };
 }
 
