@@ -9,11 +9,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
-import { loadCards } from '../App/actions';
-import { defaultAction } from '../CardsContainer/actions';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+
+import { defaultAction } from '../CardsContainer/actions';
 import makeSelectCardsContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -26,17 +25,19 @@ export class CardsContainer extends React.Component {
     this.props.foo();
   }
 
-  renderCard(item, index){
-    return(
-      <Card {...item} />
-    )
+  renderCard(item, index) {
+    return <Card {...item} key={index} />;
   }
-  
-  render() { 
-    return(
+
+  render() {
+    return (
       <div>
         <Wrapper>
-          {this.props.cardscontainer && this.props.cardscontainer.cards && this.props.cardscontainer.cards.map((item, index) => this.renderCard(item, index))}
+          {this.props.cardscontainer &&
+            this.props.cardscontainer.cards &&
+            this.props.cardscontainer.cards.map((item, index) =>
+              this.renderCard(item, index),
+            )}
         </Wrapper>
         <h1> Hello World i will be getting cards</h1>
       </div>
@@ -46,6 +47,7 @@ export class CardsContainer extends React.Component {
 
 CardsContainer.propTypes = {
   foo: PropTypes.func,
+  cardscontainer: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({
